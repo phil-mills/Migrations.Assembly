@@ -24,8 +24,15 @@ To auto generate migrations based on `DbSet` added to `DbContext` run the follow
 cd ./Project.Data/
 dotnet ef migrations add MyMigrationName --startup-project ../Project.Startup/
 ```
+You can also specify the output directory path by using the option `-o ~/your_output_path`.
 
-You do not always have to auto gen migrations, we can write custom migrations as denoted by `Custom_CreatePersons_2022051600`
+You do not always have to auto generate migrations, we can write custom migrations as denoted by `Custom_CreatePersons_2022051600`.
 
-### Additional Notes
-In `Startup.Configure()`, we can add `MyContext dbContext` to the parameters and use `dbContext.Database.Migrate()` to automatically migration any scripts when the project is ran.
+### Migrate Scripts
+
+To manually migrate scripts use the following from `Project.Startup`;
+```sh 
+dotnet ef database update
+``` 
+
+Alternatively it can be done automatically with the `Startup.Configure()` method, we can add `MyContext dbContext` to the parameters and use `dbContext.Database.Migrate()` to automatically migration any scripts when the project is ran.
